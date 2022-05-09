@@ -27,6 +27,10 @@ class clean_data:
 
         return missingCountCol, missingCountTot, missingPerc
 
+    def remove_duplicate(self,col:list)->pd.DataFrame:
+        """This function remove the duplicates based on the variables listed in 'list' """
+        df.self = df.drop_duplicates(col)
+
 if __name__ == "__main__":
     df = pd.read_csv("data\Week1_challenge_data_source(CSV).csv")
     data = clean_data(df=df)
