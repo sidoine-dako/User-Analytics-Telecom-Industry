@@ -13,3 +13,8 @@ class clean_data:
 
         # Percentage of missing values
         missingPerc = np.round(missingCountTot*100/self.df.size,2)
+
+        if verbose==True:
+            print(f"The dataset contains {missingCountTot} missing values in total\nThe missing values represent {missingPerc} of the values contained in the set")
+            print("These values are distributed as follows:")
+            missingCountCol
