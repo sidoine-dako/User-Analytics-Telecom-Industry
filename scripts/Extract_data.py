@@ -10,3 +10,7 @@ class extract_data:
     def extract_Google(self):
         GoogleCol = [col for col in self.df.columns if 'Google' in col]
         return self.df[GoogleCol].sum(1)
+
+    def extract_Email(self):
+        EmailCol = [col for col in self.df.columns if 'Email' in col]
+        return self.df[EmailCol].sum(1)
