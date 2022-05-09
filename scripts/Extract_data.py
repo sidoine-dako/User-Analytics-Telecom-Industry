@@ -3,14 +3,18 @@ class extract_data:
     def __init__(self,df:pd.DataFrame):
         self.df =df
     
-    def extract_SocialMedia(self):
+    def extract_SocialMedia(self,identifier:str):
         SocialMediaCol = [col for col in self.df.columns if 'Social Media' in col]
-        return self.df[SocialMediaCol].sum(1)
+        return self.df[SocialMediaCol].groupby(identifier).sum().sum(1)
 
-    def extract_Google(self):
+    def extract_Google(self,identifier:str):
         GoogleCol = [col for col in self.df.columns if 'Google' in col]
-        return self.df[GoogleCol].sum(1)
+        return self.df[GoogleCol].groupby(identifier).sum().sum(1)
 
-    def extract_Email(self):
+    def extract_Email(self,identifier:str):
         EmailCol = [col for col in self.df.columns if 'Email' in col]
-        return self.df[EmailCol].sum(1)
+        return self.df[EmailCol].groupby(identifier).sum().sum(1)
+
+    def extract_Youtube(self,identifier:str):
+        YoutubeCol = [col for col in self.df.columns if 'Youtube' in col]
+        return self.df[YoutubeCol].groupby(identifier).sum().sum(1)
