@@ -5,8 +5,14 @@ class clean_data:
         self.df = df
 
     def missing_values(self,verbose=True):
+        """This function compute the number of missing values per column, in the total and the percentage 
+        of missing values.
+        Inputs:
+        -------
+            verbose (default=True): whether the statistics relative to missing values should be printed
+        """
         # Count missing values per column
-        missingCountCol = self.df.isna().sum()
+        missingCountCol = self.df.isna().sum().sort_values(ascending=False)
 
         # Count the total number of missing values
         missingCountTot = missingCountCol.sum()
@@ -15,6 +21,13 @@ class clean_data:
         missingPerc = np.round(missingCountTot*100/self.df.size,2)
 
         if verbose==True:
-            print(f"The dataset contains {missingCountTot} missing values in total\nThe missing values represent {missingPerc} of the values contained in the set")
+            print(f"The dataset contains {missingCountTot} missing values in total\nThe missing values represent {missingPerc}% of the values contained in the set")
             print("These values are distributed as follows:")
-            missingCountCol
+            print(missingCountCol)
+
+        return missingCountCol, missingCountTot, missingPerc
+
+if __name__ == "__main__":
+    df = pd.read_csv("data\Week1_challenge_data_source(CSV).csv")
+    data = clean_data(df=df)
+    data.missing_values()
