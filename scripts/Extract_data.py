@@ -1,3 +1,4 @@
+from heapq import merge
 import pandas as pd
 import functools as ft
 class extract_data:
@@ -41,3 +42,7 @@ class extract_data:
         YoutubeData = self.extract_Youtube(identifier)
         GamingData = self.extract_Gaming(identifier)
         OtherData = self.extract_Other(identifier)
+        Data = [SocialMediaData,GoogleData,EmailData,YoutubeData,GamingData,OtherData]
+        df_final = ft.reduce(lambda left,right: pd.merge(left,right,left_index=True,right_index=True,
+        validate="one_to_one"),Data)
+        return df_final
