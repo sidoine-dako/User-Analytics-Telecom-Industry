@@ -1,4 +1,5 @@
 import pandas as pd
+import functools as ft
 class extract_data:
     def __init__(self,df:pd.DataFrame):
         self.df = df
