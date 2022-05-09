@@ -9,37 +9,37 @@ class extract_data:
         SocialMediaCol = [col for col in self.df.columns if 'Social Media' in col]
         SocialMediaCol.append(identifier)
         print(SocialMediaCol)
-        SocialMediaData = pd.Series(self.df[SocialMediaCol].groupby(identifier).sum(1),name='Social Media')
+        SocialMediaData = pd.Series(self.df[SocialMediaCol].groupby(identifier).sum().sum(1),name='Social Media')
         return SocialMediaData
 
     def extract_Google(self,identifier:str):
         GoogleCol = [col for col in self.df.columns if 'Google' in col]
         GoogleCol.append(identifier)
-        GoogleData = pd.Series(self.df[GoogleCol].groupby(identifier).sum(1),name="Google")
+        GoogleData = pd.Series(self.df[GoogleCol].groupby(identifier).sum().sum(1),name="Google")
         return GoogleData
 
     def extract_Email(self,identifier:str):
         EmailCol = [col for col in self.df.columns if 'Email' in col]
         EmailCol.append(identifier)
-        EmailData = pd.Series(self.df[EmailCol].groupby(identifier).sum(1),name="Email")
+        EmailData = pd.Series(self.df[EmailCol].groupby(identifier).sum().sum(1),name="Email")
         return EmailData
 
     def extract_Youtube(self,identifier:str):
         YoutubeCol = [col for col in self.df.columns if 'Youtube' in col]
         YoutubeCol.append(identifier)
-        YoutubeData = pd.Series(self.df[YoutubeCol].groupby(identifier).sum(1),name="Youtube")
+        YoutubeData = pd.Series(self.df[YoutubeCol].groupby(identifier).sum().sum(1),name="Youtube")
         return YoutubeData
 
     def extract_Gaming(self,identifier:str):
         GamingCol = [col for col in self.df.columns if 'Gaming' in col]
         GamingCol.append(identifier)
-        GamingData = pd.Series(self.df[GamingCol].groupby(identifier).sum(1),name="Gaming")
+        GamingData = pd.Series(self.df[GamingCol].groupby(identifier).sum().sum(1),name="Gaming")
         return GamingData
 
     def extract_Other(self,identifier:str):
         OtherCol = [col for col in self.df.columns if 'Other' in col]
         OtherCol.append(identifier)
-        OtherData = pd.Series(self.df[OtherCol].groupby(identifier).sum(1),name="Other")
+        OtherData = pd.Series(self.df[OtherCol].groupby(identifier).sum().sum(1),name="Other")
         return OtherData
 
     def merge_data(self,identifier:str):
