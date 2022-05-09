@@ -18,3 +18,11 @@ class extract_data:
     def extract_Youtube(self,identifier:str):
         YoutubeCol = [col for col in self.df.columns if 'Youtube' in col]
         return self.df[YoutubeCol].groupby(identifier).sum().sum(1)
+
+    def extract_Gaming(self,identifier:str):
+        GamingCol = [col for col in self.df.columns if 'Gaming' in col]
+        return self.df[GamingCol].groupby(identifier).sum().sum(1)
+
+    def extract_Other(self,identifier:str):
+        OtherCol = [col for col in self.df.columns if 'Youtube' in col]
+        return self.df[OtherCol].groupby(identifier).sum().sum(1)
