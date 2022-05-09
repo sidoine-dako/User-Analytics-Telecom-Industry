@@ -29,10 +29,10 @@ class clean_data:
 
     def remove_duplicate(self,col:list)->pd.DataFrame:
         """This function remove the duplicates based on the variables listed in 'list' """
-        dfWithoutDuplicated = df.drop_duplicates(col)
+        dfWithoutDuplicated = self.df.drop_duplicates(col)
         return dfWithoutDuplicated
 
 if __name__ == "__main__":
-    df = pd.read_csv("data\Week1_challenge_data_source(CSV).csv")
+    df = pd.read_csv("..\data\Week1_challenge_data_source(CSV).csv")
     data = clean_data(df=df)
     data.missing_values()
