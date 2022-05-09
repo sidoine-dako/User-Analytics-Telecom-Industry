@@ -1,2 +1,2 @@
 notebook/.ipynb_checkpoints
-scripts/*.pyc
+scripts/__pycache__
