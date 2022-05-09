@@ -6,24 +6,38 @@ class extract_data:
     
     def extract_SocialMedia(self,identifier:str):
         SocialMediaCol = [col for col in self.df.columns if 'Social Media' in col]
-        return self.df[SocialMediaCol].groupby(identifier).sum().sum(1)
+        SocialMediaData = pd.Series(self.df[SocialMediaCol].groupby(identifier).sum().sum(1),name='Social Media')
+        return SocialMediaData
 
     def extract_Google(self,identifier:str):
         GoogleCol = [col for col in self.df.columns if 'Google' in col]
-        return self.df[GoogleCol].groupby(identifier).sum().sum(1)
+        GoogleData = pd.Series(self.df[GoogleCol].groupby(identifier).sum().sum(1),name="Google")
+        return GoogleData
 
     def extract_Email(self,identifier:str):
         EmailCol = [col for col in self.df.columns if 'Email' in col]
-        return self.df[EmailCol].groupby(identifier).sum().sum(1)
+        EmailData = pd.Series(self.df[EmailCol].groupby(identifier).sum().sum(1),name="Email")
+        return EmailData
 
     def extract_Youtube(self,identifier:str):
         YoutubeCol = [col for col in self.df.columns if 'Youtube' in col]
-        return self.df[YoutubeCol].groupby(identifier).sum().sum(1)
+        YoutubeData = pd.Series(self.df[YoutubeCol].groupby(identifier).sum().sum(1),name="Youtube")
+        return YoutubeData
 
     def extract_Gaming(self,identifier:str):
         GamingCol = [col for col in self.df.columns if 'Gaming' in col]
-        return self.df[GamingCol].groupby(identifier).sum().sum(1)
+        GamingData = pd.Series(self.df[GamingCol].groupby(identifier).sum().sum(1),name="Gaming")
+        return GamingData
 
     def extract_Other(self,identifier:str):
         OtherCol = [col for col in self.df.columns if 'Youtube' in col]
-        return self.df[OtherCol].groupby(identifier).sum().sum(1)
+        OtherData = pd.Series(self.df[OtherCol].groupby(identifier).sum().sum(1),name="Other")
+        return OtherData
+
+    def merge_data(self,identifier:str):
+        SocialMediaData = self.extract_SocialMedia(identifier)
+        GoogleData = self.extract_Google(identifier)
+        EmailData = self.extract_Email(identifier)
+        YoutubeData = self.extract_Youtube(identifier)
+        GamingData = self.extract_Gaming(identifier)
+        OtherData = self.extract_Other(identifier)
