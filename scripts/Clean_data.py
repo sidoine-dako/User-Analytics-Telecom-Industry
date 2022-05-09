@@ -10,3 +10,6 @@ class clean_data:
 
         # Count the total number of missing values
         missingCountTot = missingCountCol.sum()
+
+        # Percentage of missing values
+        missingPerc = np.round(missingCountTot*100/self.df.size,2)
