@@ -32,6 +32,23 @@ class clean_data:
         dfWithoutDuplicated = self.df.drop_duplicates(col)
         return dfWithoutDuplicated
 
+    def detect_outliers(self,col:list):
+        """This function returns the outliers in a data set"""
+        Q1 = self.df[col].quantile(.25)
+        Q3 = self.df[col].quantile(.75)
+        IQR = Q3-Q1
+        # Total number of outliers per column
+        ColName = Q1.index
+        outliersCount = ((self.df.loc[:,ColName] > Q3 + 1.5 * IQR) | (self.df.loc[:,ColName] < Q1 - 1.5 * IQR)).sum()
+        # Index of outliers per column
+        outliersCol = dict()
+        for colname in ColName:
+            outlierList = np.where((self.df.loc[:,colname] > Q3[colname] + 1.5 * IQR[colname]) | (self.df.loc[:,colname] < Q1[colname] - 1.5 * IQR[colname]))
+            outlierList = list(outlierList[0])
+            outliersCol[colname] = outlierList
+
+        return outliersCount, outlierList
+
 if __name__ == "__main__":
     df = pd.read_csv("..\data\Week1_challenge_data_source(CSV).csv")
     data = clean_data(df=df)
