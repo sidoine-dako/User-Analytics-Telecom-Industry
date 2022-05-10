@@ -6,8 +6,8 @@ class clean_data:
 
     def right_types(self,objType=[],dateType=[]):
         """This fonction convert the data types to return their real types"""
-        self.df[objTyp] = self.df[objTyp].astype(str)
-        self.df[dateType] = pd.to_datetime(self.df[objType])
+        self.df[objType] = self.df[objType].astype(str)
+        self.df.loc[:,dateType] = pd.to_datetime(self.df.loc[:,dateType],errors='coerce')
 
     def missing_values(self,verbose=True):
         """This function compute the number of missing values per column, in the total and the percentage 
