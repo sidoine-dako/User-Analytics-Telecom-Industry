@@ -4,6 +4,9 @@ class clean_data:
     def __init__(self,df:pd.DataFrame):
         self.df = df
 
+    def right_type(self,objType:list):
+        self.df[objType] = self.df[objType].astype(str).replace('nan',np.nan)
+
     def missing_values(self,verbose=True):
         """This function compute the number of missing values per column, in the total and the percentage 
         of missing values.
