@@ -4,11 +4,6 @@ class clean_data:
     def __init__(self,df:pd.DataFrame):
         self.df = df
 
-    def right_types(self,objType=[],dateType=[]):
-        """This fonction convert the data types to return their real types"""
-        self.df[objType] = self.df[objType].astype(str)
-        self.df.loc[:,dateType] = pd.to_datetime(self.df.loc[:,dateType],errors='coerce')
-
     def missing_values(self,verbose=True):
         """This function compute the number of missing values per column, in the total and the percentage 
         of missing values.
