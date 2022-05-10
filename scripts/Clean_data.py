@@ -34,10 +34,10 @@ class clean_data:
         skewList = self.df.skew
         for col in skewList.index:
             if abs(skewList[col])>1:
-                valToFill = self.df.median()
+                valToFill = self.df[col].median()
                 self.df[col] = self.df[col].fillna(valToFill)
             else:
-                valToFill = self.df.mean()
+                valToFill = self.df[col].mean()
                 self.df[col] = self.df[col].fillna(valToFill)
 
     def remove_duplicate(self,col:list)->pd.DataFrame:
