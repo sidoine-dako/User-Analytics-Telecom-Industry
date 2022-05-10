@@ -6,8 +6,8 @@ class extract_data:
         self.df = df
     
     def extract_Session(self,identifier:str,session='Bearer Id'):
-        NSession = pd.Series(self.df.loc[:,[identifier,session]].groupby(identifier).count(),
-        name='Number of session')
+        NSession = self.df[[identifier,session]].groupby(identifier).count()
+        NSession = NSession.rename(columns={session:'Number of session'})
         return NSession
 
     def extract_SocialMedia(self,identifier:str):
@@ -46,6 +46,12 @@ class extract_data:
         OtherData = pd.Series(self.df[OtherCol].groupby(identifier).sum().sum(1),name="Other")
         return OtherData
 
+    def extract_Total(self,identifier:str):
+        TotalCol = [col for col in self.df.columns if 'Total' in col]
+        TotalCol.append(identifier)
+        TotalData = pd.Series(self.df[TotalCol].groupby(identifier).sum().sum(1),name="Total")
+        return TotalData
+
     def merge_data(self,identifier:str):
         NSession = self.extract_Session(identifier)
         SocialMediaData = self.extract_SocialMedia(identifier)
@@ -54,7 +60,11 @@ class extract_data:
         YoutubeData = self.extract_Youtube(identifier)
         GamingData = self.extract_Gaming(identifier)
         OtherData = self.extract_Other(identifier)
-        Data = [NSession,SocialMediaData,GoogleData,EmailData,YoutubeData,GamingData,OtherData]
-        df_final = ft.reduce(lambda left,right: pd.merge(left,right,left_index=True,right_index=True,
+        try:
+            Data = [NSession,SocialMediaData,GoogleData,EmailData,YoutubeData,GamingData,OtherData]
+            df_final = ft.reduce(lambda left,right: pd.merge(left,right,left_index=True,right_index=True,
         validate="one_to_one"),Data)
+        except KeyError:
+            print("Please check for the name of your features")
+            df_final = None
         return df_final
