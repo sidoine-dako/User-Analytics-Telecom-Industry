@@ -5,6 +5,11 @@ class extract_data:
     def __init__(self,df:pd.DataFrame):
         self.df = df
     
+    def extract_Session(self,identifier:str,session='Bearer Id'):
+        NSession = pd.Series(self.df.loc[:,[identifier,session]].groupby(identifier).count(),
+        name='Number of session')
+        return NSession
+
     def extract_SocialMedia(self,identifier:str):
         SocialMediaCol = [col for col in self.df.columns if 'Social Media' in col]
         SocialMediaCol.append(identifier)
@@ -42,13 +47,14 @@ class extract_data:
         return OtherData
 
     def merge_data(self,identifier:str):
+        NSession = self.extract_Session(identifier)
         SocialMediaData = self.extract_SocialMedia(identifier)
         GoogleData = self.extract_Google(identifier)
         EmailData = self.extract_Email(identifier)
         YoutubeData = self.extract_Youtube(identifier)
         GamingData = self.extract_Gaming(identifier)
         OtherData = self.extract_Other(identifier)
-        Data = [SocialMediaData,GoogleData,EmailData,YoutubeData,GamingData,OtherData]
+        Data = [NSession,SocialMediaData,GoogleData,EmailData,YoutubeData,GamingData,OtherData]
         df_final = ft.reduce(lambda left,right: pd.merge(left,right,left_index=True,right_index=True,
         validate="one_to_one"),Data)
         return df_final
