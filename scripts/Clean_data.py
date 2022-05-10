@@ -25,6 +25,18 @@ class clean_data:
 
         return missingCountCol, missingCountTot, missingPerc
 
+    def fillMissing(self):
+        """This function fill the NA witb either the mean or the median.
+        It uses the mean if the distribution of the column is symmetric and the median otherwise."""
+        skewList = self.df.skew
+        for col in skewList.index:
+            if abs(skewList[col])>1:
+                valToFill = self.df.median()
+                self.df[col] = self.df[col].fillna(valToFill)
+            else:
+                valToFill = self.df.mean()
+                self.df[col] = self.df[col].fillna(valToFill)
+
     def remove_duplicate(self,col:list)->pd.DataFrame:
         """This function remove the duplicates based on the variables listed in 'list' """
         dfWithoutDuplicated = self.df.drop_duplicates(col)
