@@ -8,7 +8,6 @@ class extract_data:
     def extract_SocialMedia(self,identifier:str):
         SocialMediaCol = [col for col in self.df.columns if 'Social Media' in col]
         SocialMediaCol.append(identifier)
-        print(SocialMediaCol)
         SocialMediaData = pd.Series(self.df[SocialMediaCol].groupby(identifier).sum().sum(1),name='Social Media')
         return SocialMediaData
 
