@@ -4,6 +4,11 @@ class clean_data:
     def __init__(self,df:pd.DataFrame):
         self.df = df
 
+    def right_types(self,objType=[],dateType=[]):
+        """This fonction convert the data types to return their real types"""
+        self.df[objTyp] = self.df[objTyp].astype(str)
+        self.df[dateType] = pd.to_datetime(self.df[objType])
+
     def missing_values(self,verbose=True):
         """This function compute the number of missing values per column, in the total and the percentage 
         of missing values.
@@ -13,10 +18,8 @@ class clean_data:
         """
         # Count missing values per column
         missingCountCol = self.df.isna().sum().sort_values(ascending=False)
-
         # Count the total number of missing values
         missingCountTot = missingCountCol.sum()
-
         # Percentage of missing values
         missingPerc = np.round(missingCountTot*100/self.df.size,2)
 
@@ -46,7 +49,6 @@ class clean_data:
             outlierList = np.where((self.df.loc[:,colname] > Q3[colname] + 1.5 * IQR[colname]) | (self.df.loc[:,colname] < Q1[colname] - 1.5 * IQR[colname]))
             outlierList = list(outlierList[0])
             outliersCol[colname] = outlierList
-
         return outliersCount, outlierList
 
 if __name__ == "__main__":
