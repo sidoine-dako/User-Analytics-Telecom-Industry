@@ -10,6 +10,10 @@ class extract_data:
         NSession = NSession.rename(columns={session:'Number of session'})
         return NSession
 
+    def sum_duration(self,identifier:str,durationCol='Dur. (ms)'):
+        sumDuration = pd.Series(self.df[[identifier,durationCol]].groupby(identifier).sum().sum(1),name='Duration (s)')
+        return sumDuration
+
     def extract_SocialMedia(self,identifier:str):
         SocialMediaCol = [col for col in self.df.columns if 'Social Media' in col]
         SocialMediaCol.append(identifier)
@@ -54,14 +58,16 @@ class extract_data:
 
     def merge_data(self,identifier:str):
         NSession = self.extract_Session(identifier)
+        sumDuration = self.sum_duration(identifier)
         SocialMediaData = self.extract_SocialMedia(identifier)
         GoogleData = self.extract_Google(identifier)
         EmailData = self.extract_Email(identifier)
         YoutubeData = self.extract_Youtube(identifier)
         GamingData = self.extract_Gaming(identifier)
         OtherData = self.extract_Other(identifier)
+        TotalData = self.extract_Total(identifier)
         try:
-            Data = [NSession,SocialMediaData,GoogleData,EmailData,YoutubeData,GamingData,OtherData]
+            Data = [NSession,sumDuration,SocialMediaData,GoogleData,EmailData,YoutubeData,GamingData,OtherData,TotalData]
             df_final = ft.reduce(lambda left,right: pd.merge(left,right,left_index=True,right_index=True,
         validate="one_to_one"),Data)
         except KeyError:
