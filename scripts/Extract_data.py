@@ -10,8 +10,8 @@ class extract_data:
         NSession = NSession.rename(columns={session:'Number of session'})
         return NSession
 
-    def sum_duration(self,identifier:str,durationCol='Dur. (ms)'):
-        sumDuration = pd.Series(self.df[[identifier,durationCol]].groupby(identifier).sum().sum(1),name='Duration (s)')
+    def sum_duration(self,identifier:str,durationCol='Dur. (s)'):
+        sumDuration = self.df[[identifier,durationCol]].groupby(identifier).sum()
         return sumDuration
 
     def extract_SocialMedia(self,identifier:str):
