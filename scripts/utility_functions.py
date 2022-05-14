@@ -19,10 +19,10 @@ def topN(df,col,topn,undefined=True,rend=False):
 
 # Function to extract the top n type of handset for the top m manufacturer
 def topTypeManufact(df,nmanufact=3,ntype=5):
-    topNManufact = df.loc[:,'Handset Manufacturer'].value_counts()[:nmanufact]
+    topNManufact = topN(df,'Handset Manufacturer',topn=nmanufact,undefined=False)
     res = pd.DataFrame(columns=['Manufacturer','Type','Count'])
     for manufacturer in topNManufact.index:
         temp = df.loc[df['Handset Manufacturer']==manufacturer,'Handset Type'].value_counts()[:ntype]
-        temp = pd.DataFrame({'Manufacturer':[manufacturer]*ntype,'Type':temp.index,'Count':temp.to_list()})
-        res = pd.concat([res,temp])
+        temp2 = pd.DataFrame({'Manufacturer':[manufacturer]*ntype,'Type':temp.index,'Count':temp.to_list()})
+        res = pd.concat([res,temp2])
     return res.reset_index(drop=True)
