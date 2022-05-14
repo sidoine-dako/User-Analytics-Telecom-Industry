@@ -6,8 +6,6 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly.express as px
 
-import sys
-sys.path.append('../scripts')
 
 # UTILITY FUNCTIONS
 # Function to have the top n and plot of top n
@@ -34,7 +32,7 @@ def topTypeManufact(df,nmanufact=3,ntype=5):
 ########################################################################################################
 
 # Data importation
-df = pd.read_csv("UniqueUser.csv")
+df = pd.read_csv("./data/UniqueUser.csv")
 st.title('Tellco Data Analysis')
 st.subheader("This is a basic dashboard to present the user overview")
 # Table for the topn handset type
