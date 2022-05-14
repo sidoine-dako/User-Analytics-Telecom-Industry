@@ -34,7 +34,7 @@ def topTypeManufact(df,nmanufact=3,ntype=5):
 ########################################################################################################
 
 # Data importation
-df = pd.read_csv("./UniqueUser.csv")
+df = pd.read_csv("UniqueUser.csv")
 st.title('Tellco Data Analysis')
 st.subheader("This is a basic dashboard to present the user overview")
 # Table for the topn handset type
