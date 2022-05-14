@@ -12,7 +12,7 @@ from utility_functions import *
 
 # Data importation
 df = pd.read_csv("../data/UniqueUser.csv")
-
+st.title('Tellco Data Analysis')
 # Table for the topn handset type
 topn=st.number_input(label='Top n handset type',min_value=1,max_value=50,value=10,help="Choose a number to print the top handset type",key=1)
 
