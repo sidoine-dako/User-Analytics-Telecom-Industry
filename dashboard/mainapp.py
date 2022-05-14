@@ -24,3 +24,9 @@ topm=st.number_input(label='Top m handset manufacturer',min_value=1,max_value=50
 
 dfTopHandsetMan = topN(df,'Handset Manufacturer',topm,undefined=False)
 st.write(dfTopHandsetMan)
+
+# Table of the top n type of handset for the top m manufacturer
+topn2=st.number_input(label='Top n handset type',min_value=1,max_value=50,value=10,help="Choose a number to print the top handset type")
+topm2=st.number_input(label='Top m handset manufacturer',min_value=1,max_value=50,value=10)
+dfTopHandTMan = topTypeManufact(df,topm2,topn2)
+st.write(dfTopHandTMan)
