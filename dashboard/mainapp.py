@@ -34,6 +34,7 @@ def topTypeManufact(df,nmanufact=3,ntype=5):
 # Data importation
 df = pd.read_csv("./data/UniqueUser.csv")
 st.title('Tellco Data Analysis')
+st.sidebar('This dasboard was designed to communicate with the stakeholders of TellCo company in order to share the main insights with them.')
 st.subheader("This is a basic dashboard to present the user overview")
 # Table for the topn handset type
 st.subheader('Top handset type')
