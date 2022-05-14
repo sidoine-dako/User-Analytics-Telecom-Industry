@@ -17,7 +17,6 @@ def topN(df,col,topn,undefined=True,rend=False):
         st.plotly_chart(fig)
     return topN
 
-# Function to have the topn of handset for topm of manufacturer
 # Function to extract the top n type of handset for the top m manufacturer
 def topTypeManufact(df,nmanufact=3,ntype=5):
     topNManufact = df.loc[:,'Handset Manufacturer'].value_counts()[:nmanufact]
